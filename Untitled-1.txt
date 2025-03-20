@@ -1,0 +1,11 @@
+src/
+  ├── components/
+  │   ├── Header/
+  │   ├── About/
+  │   ├── Projects/
+  │   ├── Skills/
+  │   ├── Contact/
+  │   └── Layout/
+  ├── assets/
+  ├── styles/
+  └── utils/
