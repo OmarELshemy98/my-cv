@@ -7,7 +7,7 @@ const Projects = () => {
         My Projects
       </Typography>
       <Typography paragraph>
-        Here are some of my recent projects.
+        Sooooon
       </Typography>
     </Box>
   );

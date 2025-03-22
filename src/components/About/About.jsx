@@ -5,16 +5,16 @@ const About = () => {
   const [showMore, setShowMore] = useState(false);
   
   const basicInfo = {
-    AGE: '25',
+    AGE: '26',
     EMAIL: 'omarelshemy010@gmail.com',
     Whatapp: '01026238072',
     PHONE: '01204777405',
-    ADDRESS: 'Your Address',
+    ADDRESS: '"Fifth Settlement" , new cairo',
     LANGUAGE: 'English, Other Languages',
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, mt: -20, backgroundColor: 'white', mx: 4 }}>
+    <Paper elevation={3} sx={{ p: 4, mt: 4, backgroundColor: 'white', mx: 4 }}>
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
           <Typography variant="h5" gutterBottom>

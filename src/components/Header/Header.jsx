@@ -1,26 +1,28 @@
 import { AppBar, Toolbar, Button, Box, Typography, Container, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
-import GoogleIcon from '@mui/icons-material/Google';
-import InstagramIcon from '@mui/icons-material/Instagram';
+// Replace FacebookIcon import with LinkedInIcon
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import EmailIcon from '@mui/icons-material/Email';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const Header = () => {
   const navigate = useNavigate();
 
   const menuItems = [
-    { label: 'ABOUT', path: '/' },
-    { label: 'SKILLS', path: '/skills' },
-    { label: 'PORTFOLIO', path: '/portfolio' },
-    { label: 'EXPERIENCE', path: '/experience' },
-    { label: 'CONTACT', path: '/contact' },
+    { label: 'About', path: '/about' },
+    { label: 'Skills', path: '/skills' },
+    { label: 'Portfolio', path: '/portfolio' },
+    { label: 'Experience', path: '/experience' },
+    { label: 'Certificates', path: '/certificates' }, // Add this menu item
+    { label: 'Contact', path: '/contact' },
   ];
 
   const socialIcons = [
-    { icon: <FacebookIcon />, link: '#' },
-    { icon: <TwitterIcon />, link: '#' },
-    { icon: <GoogleIcon />, link: '#' },
-    { icon: <InstagramIcon />, link: '#' },
+    { icon: <LinkedInIcon />, link: 'https://www.linkedin.com/in/omar-elshemy-b7b4b0293/' }, // Updated icon and link
+    { icon: <GitHubIcon />, link: 'https://github.com/OmarELshemy98' },
+    { icon: <EmailIcon />, link: 'mailto:omarelshemy010@gmail.com' },
+    { icon: <WhatsAppIcon />, link: 'https://wa.me/201026238072' },
   ];
 
   return (
@@ -28,7 +30,7 @@ const Header = () => {
       <AppBar 
         position="fixed" 
         sx={{ 
-          background: 'rgba(33, 47, 41, 0.9)',
+          background: '#1a1a1a',
           boxShadow: 'none',
           padding: '10px 0'
         }}
@@ -39,26 +41,26 @@ const Header = () => {
               variant="h6" 
               sx={{ 
                 flexGrow: 1, 
-                color: '#9CC5B7',
+                color: '#ffffff',
                 fontWeight: 500,
                 letterSpacing: '1px'
               }}
             >
               Welcome to my Website
             </Typography>
-            <Box sx={{ display: 'flex', gap: 3 }}>
+            <Box sx={{ display: 'flex', gap: 2 }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.path}
                   onClick={() => navigate(item.path)}
                   sx={{
-                    color: '#9CC5B7',
+                    color: '#ffffff',
                     fontSize: '14px',
                     fontWeight: 500,
                     letterSpacing: '1px',
                     '&:hover': {
                       backgroundColor: 'transparent',
-                      color: '#ffffff',
+                      color: '#4CAF50',
                     },
                     textTransform: 'uppercase'
                   }}
@@ -73,79 +75,82 @@ const Header = () => {
 
       <Box
         sx={{
-          backgroundImage: 'url("/bridge.jpg")',
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${require('./images/background5.jpg')})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'cover',
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           position: 'relative',
-          '&::before': {
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.3)',
-          }
         }}
       >
-        <Box sx={{ position: 'relative', textAlign: 'center', color: 'white' }}>
+        <Box sx={{ position: 'relative', textAlign: 'center', color: 'white', maxWidth: '800px', mx: 'auto', px: 3 }}>
           <Avatar
-            src="./profile-photo.jpeg"
+            src={require('./images/profile-photo.jpg')}
             sx={{
-              width: 150,
-              height: 150,
-              margin: '0 auto 20px',
-              border: '3px solid white'
+              width: 180,
+              height: 180,
+              margin: '0 auto 30px',
+              border: '5px solid #4CAF50'
             }}
           />
-          <Typography variant="h2" sx={{ mb: 1, fontWeight: 500 }}>
+          <Typography variant="h2" sx={{ mb: 2, fontWeight: 600, fontSize: { xs: '2.5rem', md: '3.5rem' } }}>
             Omar Elshemy
           </Typography>
-          <Typography variant="h6" sx={{ mb: 4, letterSpacing: 1 }}>
+          <Typography 
+            variant="h6" 
+            sx={{ 
+              mb: 4, 
+              letterSpacing: 2,
+              color: '#4CAF50',
+              textTransform: 'uppercase',
+              fontWeight: 500
+            }}
+          >
             Front-End Developer
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center', mb: 4 }}>
+          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', mb: 5 }}>
             <Button 
               variant="contained" 
               sx={{ 
                 bgcolor: '#4CAF50',
-                '&:hover': { bgcolor: '#45a049' }
+                px: 4,
+                py: 1.5,
+                fontSize: '1rem',
+                '&:hover': { 
+                  bgcolor: '#45a049',
+                  transform: 'translateY(-2px)',
+                  transition: 'all 0.3s'
+                }
               }}
             >
               Hire Me
             </Button>
-            <Button 
-              variant="contained"
-              sx={{ 
-                bgcolor: '#4CAF50',
-                '&:hover': { bgcolor: '#45a049' }
-              }}
-            >
-              Download CV
-            </Button>
+           
           </Box>
-          <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
+          <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center' }}>
             {socialIcons.map((social, index) => (
               <Box
                 key={index}
                 component="a"
                 href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 sx={{
-                  width: 40,
-                  height: 40,
+                  width: 45,
+                  height: 45,
                   borderRadius: '50%',
-                  bgcolor: 'rgba(255, 255, 255, 0.2)',
+                  bgcolor: '#4CAF50',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   color: 'white',
+                  transition: 'all 0.3s',
                   '&:hover': {
-                    bgcolor: 'rgba(255, 255, 255, 0.3)',
+                    bgcolor: '#45a049',
+                    transform: 'translateY(-2px)',
                   }
                 }}
               >
