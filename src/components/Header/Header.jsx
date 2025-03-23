@@ -5,6 +5,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import FrontendDeveloperLogo from './FrontendDeveloperLogo';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -32,15 +33,21 @@ const Header = () => {
         sx={{ 
           background: '#1a1a1a',
           boxShadow: 'none',
-          padding: '10px 0'
+          padding: '5px 0'
         }}
       >
-        <Container maxWidth="lg">
-          <Toolbar sx={{ padding: '0 !important' }}>
+        <Container maxWidth="lg" sx={{ px: '0 !important' }}>
+          <Toolbar sx={{ 
+            padding: '0 !important', 
+            display: 'grid',
+            gridTemplateColumns: '1fr auto 1fr',
+            alignItems: 'center',
+            gap: 2
+          }}>
+            {/* Left section */}
             <Typography 
               variant="h6" 
               sx={{ 
-                flexGrow: 1, 
                 color: '#ffffff',
                 fontWeight: 500,
                 letterSpacing: '1px'
@@ -48,7 +55,14 @@ const Header = () => {
             >
               Welcome to my Website
             </Typography>
-            <Box sx={{ display: 'flex', gap: 2 }}>
+
+            {/* Center section */}
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <FrontendDeveloperLogo />
+            </Box>
+
+            {/* Right section */}
+            <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.path}
