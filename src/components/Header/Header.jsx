@@ -33,36 +33,58 @@ const Header = () => {
         sx={{ 
           background: '#1a1a1a',
           boxShadow: 'none',
-          padding: '5px 0'
+          padding: 0
         }}
       >
-        <Container maxWidth="lg" sx={{ px: '0 !important' }}>
-          <Toolbar sx={{ 
-            padding: '0 !important', 
-            display: 'grid',
-            gridTemplateColumns: '1fr auto 1fr',
-            alignItems: 'center',
-            gap: 2
-          }}>
-            {/* Left section */}
+        <Container 
+          maxWidth="lg" 
+          sx={{ 
+            px: '0 !important',
+            mx: 0,
+            maxWidth: '100% !important'
+          }}
+        >
+          <Toolbar 
+            disableGutters
+            sx={{ 
+              padding: '0 !important', 
+              display: 'grid',
+              gridTemplateColumns: '1fr auto 1fr',
+              alignItems: 'center',
+              gap: 2,
+              minHeight: '64px !important'
+            }}
+          >
+            {/* Left section - Welcome text */}
             <Typography 
               variant="h6" 
               sx={{ 
                 color: '#ffffff',
                 fontWeight: 500,
-                letterSpacing: '1px'
+                letterSpacing: '1px',
+                pl: 1
               }}
             >
               Welcome to my Website
             </Typography>
 
-            {/* Center section */}
-            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            {/* Center section - Logo */}
+            <Box sx={{ 
+              display: 'flex', 
+              justifyContent: 'center',
+              position: 'relative',
+              width: 'fit-content'
+            }}>
               <FrontendDeveloperLogo />
             </Box>
 
-            {/* Right section */}
-            <Box sx={{ display: 'flex', gap: 1, justifyContent: 'flex-end' }}>
+            {/* Right section - Navigation */}
+            <Box sx={{ 
+              display: 'flex', 
+              gap: 1, 
+              justifyContent: 'flex-end',
+              pr: 1
+            }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.path}
