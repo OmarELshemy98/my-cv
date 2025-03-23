@@ -47,21 +47,53 @@ const Contact = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, mt: 4, backgroundColor: 'white', mx: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+    <Paper elevation={3} sx={{ 
+      p: { xs: 2, sm: 3, md: 4 }, // Responsive padding
+      mt: 4, 
+      backgroundColor: 'white', 
+      mx: { xs: 2, sm: 3, md: 4 } // Responsive margins
+    }}>
+      <Typography 
+        variant="h4" 
+        align="center" 
+        gutterBottom 
+        sx={{ 
+          mb: { xs: 2, sm: 3, md: 4 },
+          fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' }
+        }}
+      >
         Contact Me
       </Typography>
 
-      <Grid container spacing={4}>
-        {/* Left Side - Contact Form */}
-        <Grid item xs={12} md={6}>
-          <Typography variant="h6" gutterBottom sx={{ mb: 3 }}>
+      <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+        {/* Contact Form */}
+        <Grid 
+          item 
+          xs={12} 
+          md={6}
+          sx={{ 
+            order: { xs: 2, md: 1 } // Second on mobile, first on desktop
+          }}
+        >
+          <Typography variant="h6" gutterBottom>
             Feel free to contact me
           </Typography>
           
-          <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, bgcolor: '#f5f5f5', p: 1, borderRadius: 1 }}>
-              <PersonIcon sx={{ color: '#666' }} />
+          <Box component="form" onSubmit={handleSubmit} sx={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            gap: { xs: 2, sm: 3 }
+          }}>
+            {/* Input fields styling remains same, just adding responsive padding */}
+            <Box sx={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 1, 
+              bgcolor: '#f5f5f5', 
+              p: { xs: 1.5, sm: 2 }, 
+              borderRadius: 1 
+            }}>
+              <PersonIcon sx={{ color: '#666', fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
               <TextField
                 fullWidth
                 name="name"
@@ -123,9 +155,12 @@ const Contact = () => {
               variant="contained"
               sx={{ 
                 bgcolor: '#4CAF50',
-                py: 1.5,
+                py: { xs: 1, sm: 1.5 },
+                px: { xs: 2, sm: 3 },
                 width: 'fit-content',
-                '&:hover': { bgcolor: '#45a049' }
+                fontSize: { xs: '0.9rem', sm: '1rem' },
+                '&:hover': { bgcolor: '#45a049' },
+                alignSelf: 'center' // Centers the button within the flex container
               }}
             >
               Send
@@ -133,11 +168,24 @@ const Contact = () => {
           </Box>
         </Grid>
 
-        {/* Right Side - Contact Information */}
-        <Grid item xs={12} md={6}>
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, mt: { xs: 4, md: 0 } }}>
+        {/* Contact Information */}
+        <Grid 
+          item 
+          xs={12} 
+          md={6}
+          sx={{ 
+            order: { xs: 1, md: 2 }, // First on mobile, second on desktop
+            mb: { xs: 3, md: 0 } // Add bottom margin on mobile only
+          }}
+        >
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 3, md: 4 } }}>
             <Box>
-              <Typography variant="h6" gutterBottom>
+              <Typography variant="h6" gutterBottom
+                sx={{ 
+                  fontSize: { xs: '1.1rem', sm: '1.25rem' },
+                  mb: { xs: 1, sm: 1.5 }
+                }}
+              >
                 Address
               </Typography>
               <Typography 
@@ -151,12 +199,14 @@ const Contact = () => {
                   gap: 1, 
                   color: '#666',
                   textDecoration: 'none',
+                  fontSize: { xs: '0.9rem', sm: '1rem' },
+                  wordBreak: 'break-word',
                   '&:hover': {
                     color: '#4CAF50',
                   }
                 }}
               >
-                <LocationOnIcon />
+                <LocationOnIcon sx={{ fontSize: { xs: '1.2rem', sm: '1.5rem' } }} />
                 25,new lotus, fifth statements,New cairo , Egypt
               </Typography>
             </Box>

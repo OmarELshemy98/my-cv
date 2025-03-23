@@ -11,19 +11,52 @@ const Skills = () => {
   ];
 
   return (
-    <Paper elevation={3} sx={{ p: 4, mt: 4, backgroundColor: 'white', mx: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+    <Paper elevation={3} sx={{ 
+      p: { xs: 2, sm: 3, md: 4 }, // Responsive padding
+      mt: 4, 
+      backgroundColor: 'white', 
+      mx: { xs: 2, sm: 3, md: 4 } // Responsive margins
+    }}>
+      <Typography 
+        variant="h4" 
+        align="center" 
+        gutterBottom 
+        sx={{ 
+          mb: { xs: 2, sm: 3, md: 4 },
+          fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' }
+        }}
+      >
         Professional Skills
       </Typography>
       
-      <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 4 }}>
+      <Box sx={{ 
+        display: 'grid',
+        gridTemplateColumns: { 
+          xs: '1fr',           // Single column on mobile
+          sm: 'repeat(2, 1fr)' // Two columns on tablet and up
+        },
+        gap: { xs: 2, sm: 3, md: 4 }
+      }}>
         {skills.map((skill) => (
-          <Box key={skill.name} sx={{ mb: 2 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-              <Typography sx={{ color: '#4CAF50', fontWeight: 500 }}>
+          <Box key={skill.name} sx={{ mb: { xs: 1.5, sm: 2 } }}>
+            <Box sx={{ 
+              display: 'flex', 
+              justifyContent: 'space-between', 
+              mb: { xs: 0.5, sm: 1 },
+              alignItems: 'center'
+            }}>
+              <Typography sx={{ 
+                color: '#4CAF50', 
+                fontWeight: 500,
+                fontSize: { xs: '0.9rem', sm: '1rem' }
+              }}>
                 {skill.name}
               </Typography>
-              <Typography sx={{ color: '#4CAF50', fontWeight: 500 }}>
+              <Typography sx={{ 
+                color: '#4CAF50', 
+                fontWeight: 500,
+                fontSize: { xs: '0.9rem', sm: '1rem' }
+              }}>
                 {skill.value}%
               </Typography>
             </Box>
@@ -31,12 +64,12 @@ const Skills = () => {
               variant="determinate"
               value={skill.value}
               sx={{
-                height: 8,
-                borderRadius: 4,
+                height: { xs: 6, sm: 8 }, // Thinner on mobile
+                borderRadius: { xs: 3, sm: 4 },
                 backgroundColor: '#e0e0e0',
                 '& .MuiLinearProgress-bar': {
                   backgroundColor: '#4CAF50',
-                  borderRadius: 4,
+                  borderRadius: { xs: 3, sm: 4 },
                 }
               }}
             />

@@ -14,13 +14,32 @@ const About = () => {
   };
 
   return (
-    <Paper elevation={3} sx={{ p: 4, mt: 4, backgroundColor: 'white', mx: 4 }}>
-      <Grid container spacing={4}>
+    <Paper elevation={3} sx={{ 
+      p: { xs: 2, sm: 3, md: 4 }, // Responsive padding
+      mt: 4, 
+      backgroundColor: 'white', 
+      mx: { xs: 2, sm: 3, md: 4 } // Responsive margins
+    }}>
+      <Grid container spacing={{ xs: 2, md: 4 }}> {/* Adjusted spacing for mobile */}
         <Grid item xs={12} md={6}>
-          <Typography variant="h5" gutterBottom>
+          <Typography 
+            variant="h5" 
+            gutterBottom 
+            sx={{ 
+              fontSize: { xs: '1.5rem', md: '1.75rem' },
+              mb: { xs: 2, md: 3 }
+            }}
+          >
             About
           </Typography>
-          <Typography paragraph>
+          <Typography 
+            paragraph
+            sx={{ 
+              fontSize: { xs: '0.9rem', md: '1rem' },
+              lineHeight: { xs: 1.6, md: 1.8 },
+              textAlign: 'justify'
+            }}
+          >
             About Me
             Hi, I'm Omar Ibrahim Hamdy Elshemy, a passionate and detail-oriented Front-End Developer with a keen eye for clean code and elegant design. I specialize in building responsive, user-friendly, and performance-focused websites that engage users and enhance their experience.
             With expertise in HTML5, CSS3, JavaScript, and popular frameworks like React and Vue.js, I am committed to delivering high-quality solutions that are both visually appealing and functional. My work is driven by a strong foundation in UI/UX principles, ensuring that every project I work on is not only well-coded but also user-centered.
@@ -39,7 +58,8 @@ const About = () => {
             sx={{ 
               color: '#4CAF50',
               textTransform: 'none',
-              padding: 0,
+              padding: { xs: '8px 0', md: 0 }, // Better touch target on mobile
+              fontSize: { xs: '0.9rem', md: '1rem' },
               '&:hover': {
                 backgroundColor: 'transparent',
                 color: '#45a049'
@@ -51,39 +71,47 @@ const About = () => {
         </Grid>
         
         <Grid item xs={12} md={6}>
-          <Typography variant="h5" gutterBottom>
+          <Typography 
+            variant="h5" 
+            gutterBottom 
+            sx={{ 
+              fontSize: { xs: '1.5rem', md: '1.75rem' },
+              mb: { xs: 2, md: 3 },
+              mt: { xs: 3, md: 0 } // Add spacing on mobile between sections
+            }}
+          >
             Basic Information
           </Typography>
           {Object.entries(basicInfo).map(([key, value]) => (
-            <Box key={key} sx={{ display: 'flex', mb: 2 }}>
-              <Typography sx={{ minWidth: 120, fontWeight: 'bold' }}>
+            <Box 
+              key={key} 
+              sx={{ 
+                display: 'flex', 
+                mb: { xs: 1.5, md: 2 },
+                flexDirection: { xs: 'column', sm: 'row' }, // Stack on mobile
+                gap: { xs: 0.5, sm: 0 } // Add gap when stacked
+              }}
+            >
+              <Typography 
+                sx={{ 
+                  minWidth: { sm: 120 },
+                  fontWeight: 'bold',
+                  fontSize: { xs: '0.9rem', md: '1rem' }
+                }}
+              >
                 {key}:
               </Typography>
-              {key === 'EMAIL' ? (
+              {key === 'EMAIL' || key === 'Whatapp' ? (
                 <Typography 
                   component="a" 
-                  href={`mailto:${value}`}
+                  href={key === 'EMAIL' ? `mailto:${value}` : `https://wa.me/2${value}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   sx={{ 
                     color: '#4CAF50',
                     textDecoration: 'none',
-                    '&:hover': {
-                      textDecoration: 'underline'
-                    }
-                  }}
-                >
-                  {value}
-                </Typography>
-              ) : key === 'Whatapp' ? (
-                <Typography 
-                  component="a" 
-                  href={`https://wa.me/2${value}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  sx={{ 
-                    color: '#4CAF50',
-                    textDecoration: 'none',
+                    fontSize: { xs: '0.9rem', md: '1rem' },
+                    wordBreak: 'break-word', // Handle long email addresses
                     '&:hover': {
                       textDecoration: 'underline'
                     }
@@ -92,7 +120,9 @@ const About = () => {
                   {value}
                 </Typography>
               ) : (
-                <Typography>{value}</Typography>
+                <Typography sx={{ fontSize: { xs: '0.9rem', md: '1rem' } }}>
+                  {value}
+                </Typography>
               )}
             </Box>
           ))}

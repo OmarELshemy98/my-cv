@@ -91,28 +91,44 @@ const Certificates = () => {
   ];
 
   return (
-    <Paper elevation={3} sx={{ p: 4, mt: 4, backgroundColor: 'white', mx: 4 }}>
-      <Typography variant="h4" align="center" gutterBottom sx={{ mb: 4 }}>
+    <Paper elevation={3} sx={{ 
+      p: { xs: 2, sm: 3, md: 4 }, // Responsive padding
+      mt: 4, 
+      backgroundColor: 'white', 
+      mx: { xs: 2, sm: 3, md: 4 } // Responsive margins
+    }}>
+      <Typography 
+        variant="h4" 
+        align="center" 
+        gutterBottom 
+        sx={{ 
+          mb: { xs: 2, sm: 3, md: 4 },
+          fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' }
+        }}
+      >
         My Certificates
       </Typography>
 
-      <Grid container spacing={3}>
+      <Grid container spacing={{ xs: 2, sm: 2, md: 3 }}>
         {certificates.map((cert) => (
           <Grid item xs={12} sm={6} md={4} key={cert.id}>
             <Box
               sx={{
                 position: 'relative',
-                height: 300,
+                height: { xs: 200, sm: 250, md: 300 }, // Responsive height
                 overflow: 'hidden',
                 borderRadius: 2,
                 boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
                 transition: 'transform 0.3s ease-in-out',
                 cursor: 'pointer',
                 '&:hover': {
-                  transform: 'scale(1.05)',
+                  transform: { xs: 'none', sm: 'scale(1.05)' }, // Disable hover effect on mobile
                   '& .overlay': {
-                    opacity: 1
+                    opacity: { xs: 1, sm: 0 } // Always show overlay on mobile
                   }
+                },
+                '& .overlay': {
+                  opacity: { xs: 1, sm: 0 } // Always show overlay on mobile
                 }
               }}
               onClick={() => handleOpen(cert.image)}
@@ -135,20 +151,40 @@ const Certificates = () => {
                   bottom: 0,
                   left: 0,
                   right: 0,
-                  bgcolor: 'rgba(0,0,0,0.7)',
+                  bgcolor: 'rgba(0,0,0,0.8)', // Darker background for better readability
                   color: 'white',
-                  p: 2,
-                  opacity: 0,
+                  p: { xs: 1.5, sm: 2 }, // Responsive padding
                   transition: 'opacity 0.3s ease-in-out'
                 }}
               >
-                <Typography variant="h6" align="center" gutterBottom>
+                <Typography 
+                  variant="h6" 
+                  align="center" 
+                  gutterBottom
+                  sx={{
+                    fontSize: { xs: '0.9rem', sm: '1rem', md: '1.25rem' },
+                    mb: { xs: 0.5, sm: 1 }
+                  }}
+                >
                   {cert.title}
                 </Typography>
-                <Typography variant="body2" align="center">
+                <Typography 
+                  variant="body2" 
+                  align="center"
+                  sx={{
+                    fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                    mb: { xs: 0.25, sm: 0.5 }
+                  }}
+                >
                   {cert.issueDate}
                 </Typography>
-                <Typography variant="body2" align="center">
+                <Typography 
+                  variant="body2" 
+                  align="center"
+                  sx={{
+                    fontSize: { xs: '0.8rem', sm: '0.875rem' }
+                  }}
+                >
                   {cert.provider}
                 </Typography>
               </Box>
@@ -164,35 +200,42 @@ const Certificates = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          p: { xs: 1, sm: 2 } // Add padding for mobile
         }}
       >
-        <Box sx={{ position: 'relative' }}>
+        <Box sx={{ 
+          position: 'relative',
+          width: { xs: '95%', sm: 'auto' }, // Full width on mobile
+          maxWidth: '100vw'
+        }}>
           <IconButton
             onClick={handleClose}
             sx={{
               position: 'absolute',
-              right: 8,
-              top: 8,
+              right: { xs: 4, sm: 8 },
+              top: { xs: 4, sm: 8 },
               color: 'white',
-              bgcolor: 'rgba(0, 0, 0, 0.5)',
+              bgcolor: 'rgba(0, 0, 0, 0.7)',
               '&:hover': {
-                bgcolor: 'rgba(0, 0, 0, 0.7)',
+                bgcolor: 'rgba(0, 0, 0, 0.9)',
               },
               zIndex: 1,
+              padding: { xs: 0.5, sm: 1 } // Smaller button on mobile
             }}
           >
-            <CloseIcon />
+            <CloseIcon sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem' } }} />
           </IconButton>
           <Box
             component="img"
             src={selectedImage}
             alt="Certificate"
             sx={{
-              maxWidth: '90%',
-              maxHeight: '90vh',
+              width: '100%',
+              maxWidth: '100vw',
+              maxHeight: { xs: '80vh', sm: '90vh' },
               objectFit: 'contain',
               bgcolor: 'white',
-              p: 1,
+              p: { xs: 0.5, sm: 1 },
               borderRadius: 1,
             }}
           />
