@@ -1,4 +1,17 @@
-import { AppBar, Toolbar, Button, Box, Typography, Container, Avatar } from '@mui/material';
+import { 
+  AppBar, 
+  Toolbar, 
+  Button, 
+  Box, 
+  Typography, 
+  Container, 
+  Avatar,
+  IconButton,
+  Drawer,
+  List,
+  ListItem
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -63,6 +76,12 @@ const Header = () => {
     { icon: <WhatsAppIcon />, link: 'https://wa.me/201026238072' },
   ];
 
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleMenuToggle = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <>
       <AppBar 
@@ -73,33 +92,27 @@ const Header = () => {
           padding: 0
         }}
       >
-        <Container 
-          maxWidth="lg" 
-          sx={{ 
-            px: '0 !important',
-            mx: 0,
-            maxWidth: '100% !important'
-          }}
-        >
+        <Container maxWidth="lg" sx={{ px: '0 !important', mx: 0, maxWidth: '100% !important' }}>
           <Toolbar 
             disableGutters
             sx={{ 
               padding: '0 !important', 
               display: 'grid',
-              gridTemplateColumns: '1fr auto 1fr',
+              gridTemplateColumns: { xs: '1fr auto', md: '1fr auto 1fr' },
               alignItems: 'center',
               gap: 2,
               minHeight: '64px !important'
             }}
           >
-            {/* Left section - Welcome text */}
+            {/* Welcome text - hidden on mobile */}
             <Typography 
               variant="h6" 
               sx={{ 
                 color: '#ffffff',
                 fontWeight: 500,
                 letterSpacing: '1px',
-                pl: 1
+                pl: 1,
+                display: { xs: 'none', md: 'block' }
               }}
             >
               Welcome to my Website
@@ -115,9 +128,22 @@ const Header = () => {
               <FrontendDeveloperLogo />
             </Box>
 
-            {/* Right section - Navigation */}
+            {/* Burger Menu Icon - visible only on mobile */}
+            <IconButton
+              sx={{ 
+                display: { xs: 'block', md: 'none' },
+                color: 'white',
+                ml: 'auto',
+                mr: 1
+              }}
+              onClick={handleMenuToggle}
+            >
+              <MenuIcon />
+            </IconButton>
+
+            {/* Desktop Navigation */}
             <Box sx={{ 
-              display: 'flex', 
+              display: { xs: 'none', md: 'flex' },
               gap: 1, 
               justifyContent: 'flex-end',
               pr: 1
@@ -158,6 +184,47 @@ const Header = () => {
           </Toolbar>
         </Container>
       </AppBar>
+
+      {/* Mobile Menu Drawer */}
+      <Drawer
+        anchor="right"
+        open={mobileMenuOpen}
+        onClose={handleMenuToggle}
+        sx={{
+          '& .MuiDrawer-paper': {
+            width: '250px',
+            background: '#1a1a1a',
+            pt: 2
+          }
+        }}
+      >
+        <List>
+          {menuItems.map((item) => (
+            <ListItem 
+              key={item.sectionId}
+              onClick={() => {
+                handleScroll(item.sectionId);
+                handleMenuToggle();
+              }}
+              sx={{
+                color: activeSection === item.sectionId ? '#4CAF50' : '#ffffff',
+                '&:hover': {
+                  backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                  color: '#4CAF50',
+                },
+                cursor: 'pointer',
+                padding: '12px 24px',
+                textTransform: 'uppercase',
+                fontWeight: 500,
+                letterSpacing: '1px',
+                fontSize: '14px'
+              }}
+            >
+              {item.label}
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
 
       <Box
         sx={{
