@@ -1,4 +1,5 @@
 import { BrowserRouter as Router } from 'react-router-dom';
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Layout from './components/Layout/Layout';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
