@@ -1,26 +1,63 @@
 import { AppBar, Toolbar, Button, Box, Typography, Container, Avatar } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-// Replace FacebookIcon import with LinkedInIcon
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import FrontendDeveloperLogo from './FrontendDeveloperLogo';
+import { useState, useEffect } from 'react';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('');
+
+  const handleScroll = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 64; // Height of your fixed header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+      setActiveSection(sectionId);
+    }
+  };
+
+  // Track scroll position to highlight active section
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      const sections = menuItems.map(item => item.sectionId);
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScrollSpy);
+    return () => window.removeEventListener('scroll', handleScrollSpy);
+  }, []);
 
   const menuItems = [
-    { label: 'About', path: '/about' },
-    { label: 'Skills', path: '/skills' },
-    { label: 'Portfolio', path: '/portfolio' },
-    { label: 'Experience', path: '/experience' },
-    { label: 'Certificates', path: '/certificates' }, // Add this menu item
-    { label: 'Contact', path: '/contact' },
+    { label: 'About', sectionId: 'about' },
+    { label: 'Skills', sectionId: 'skills' },
+    { label: 'Portfolio', sectionId: 'portfolio' },
+    { label: 'Experience', sectionId: 'experience' },
+    { label: 'Certificates', sectionId: 'certificates' },
+    { label: 'Contact', sectionId: 'contact' },
   ];
 
   const socialIcons = [
-    { icon: <LinkedInIcon />, link: 'https://www.linkedin.com/in/omar-elshemy-b7b4b0293/' }, // Updated icon and link
+    { icon: <LinkedInIcon />, link: 'https://www.linkedin.com/in/omar-elshemy-b7b4b0293/' },
     { icon: <GitHubIcon />, link: 'https://github.com/OmarELshemy98' },
     { icon: <EmailIcon />, link: 'mailto:omarelshemy010@gmail.com' },
     { icon: <WhatsAppIcon />, link: 'https://wa.me/201026238072' },
@@ -87,16 +124,29 @@ const Header = () => {
             }}>
               {menuItems.map((item) => (
                 <Button
-                  key={item.path}
-                  onClick={() => navigate(item.path)}
+                  key={item.sectionId}
+                  onClick={() => handleScroll(item.sectionId)}
                   sx={{
-                    color: '#ffffff',
+                    color: activeSection === item.sectionId ? '#4CAF50' : '#ffffff',
                     fontSize: '14px',
                     fontWeight: 500,
                     letterSpacing: '1px',
+                    position: 'relative',
                     '&:hover': {
                       backgroundColor: 'transparent',
                       color: '#4CAF50',
+                    },
+                    '&::after': {
+                      content: '""',
+                      position: 'absolute',
+                      bottom: 0,
+                      left: '50%',
+                      transform: activeSection === item.sectionId ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(0)',
+                      transformOrigin: 'center',
+                      width: '100%',
+                      height: '2px',
+                      backgroundColor: '#4CAF50',
+                      transition: 'transform 0.3s ease'
                     },
                     textTransform: 'uppercase'
                   }}
