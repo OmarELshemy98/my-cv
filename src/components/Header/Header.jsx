@@ -12,7 +12,8 @@ import {
   ListItem
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useNavigate } from 'react-router-dom';
+// Remove this unused import
+// import { useNavigate } from 'react-router-dom';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import EmailIcon from '@mui/icons-material/Email';
@@ -49,7 +50,7 @@ const Header = () => {
     }
   };
 
-  // Combine the two useEffects into one
+  // Fix the useEffect hook
   useEffect(() => {
     const handleScrollSpy = () => {
       const sections = menuItems.map(item => item.sectionId);
@@ -68,7 +69,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScrollSpy);
     return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, []); // No dependencies needed as menuItems is constant
+  }, []); // menuItems is constant, so it doesn't need to be in dependencies
 
   const handleMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
