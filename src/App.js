@@ -34,6 +34,7 @@ function App() {
           </section>
         </Box>
       </Layout>
+      <SpeedInsights /> {/* Add SpeedInsights here */}
     </Router>
   );
 }

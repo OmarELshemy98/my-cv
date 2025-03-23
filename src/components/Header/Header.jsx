@@ -21,25 +21,35 @@ import FrontendDeveloperLogo from './FrontendDeveloperLogo';
 import { useState, useEffect } from 'react';
 
 const Header = () => {
-  const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('');
+  const [activeSection, setActiveSection] = useState('about');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Define menuItems and socialIcons first before using them
+  const menuItems = [
+    { label: 'About', sectionId: 'about' },
+    { label: 'Skills', sectionId: 'skills' },
+    { label: 'Portfolio', sectionId: 'portfolio' },
+    { label: 'Experience', sectionId: 'experience' },
+    { label: 'Certificates', sectionId: 'certificates' },
+    { label: 'Contact', sectionId: 'contact' },
+  ];
+
+  const socialIcons = [
+    { icon: <LinkedInIcon />, link: 'https://www.linkedin.com/in/omar-elshemy-b7b4b0293/' },
+    { icon: <GitHubIcon />, link: 'https://github.com/OmarELshemy98' },
+    { icon: <EmailIcon />, link: 'mailto:omarelshemy010@gmail.com' },
+    { icon: <WhatsAppIcon />, link: 'https://wa.me/201026238072' },
+  ];
 
   const handleScroll = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const headerOffset = 64; // Height of your fixed header
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      element.scrollIntoView({ behavior: 'smooth' });
       setActiveSection(sectionId);
     }
   };
 
-  // Track scroll position to highlight active section
+  // Combine the two useEffects into one
   useEffect(() => {
     const handleScrollSpy = () => {
       const sections = menuItems.map(item => item.sectionId);
@@ -58,25 +68,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScrollSpy);
     return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, []);
-
-  const menuItems = [
-    { label: 'About', sectionId: 'about' },
-    { label: 'Skills', sectionId: 'skills' },
-    { label: 'Portfolio', sectionId: 'portfolio' },
-    { label: 'Experience', sectionId: 'experience' },
-    { label: 'Certificates', sectionId: 'certificates' },
-    { label: 'Contact', sectionId: 'contact' },
-  ];
-
-  const socialIcons = [
-    { icon: <LinkedInIcon />, link: 'https://www.linkedin.com/in/omar-elshemy-b7b4b0293/' },
-    { icon: <GitHubIcon />, link: 'https://github.com/OmarELshemy98' },
-    { icon: <EmailIcon />, link: 'mailto:omarelshemy010@gmail.com' },
-    { icon: <WhatsAppIcon />, link: 'https://wa.me/201026238072' },
-  ];
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  }, []); // No dependencies needed as menuItems is constant
 
   const handleMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
