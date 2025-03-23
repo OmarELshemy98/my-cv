@@ -7,6 +7,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import { useState } from 'react';
 import emailjs from '@emailjs/browser';
 
+emailjs.init('YOUR_PUBLIC_KEY'); // Add this line before the component
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -25,9 +27,10 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Replace these placeholder values with your actual EmailJS credentials
     emailjs.send(
-      'YOUR_SERVICE_ID', // Get this from EmailJS dashboard
-      'YOUR_TEMPLATE_ID', // Get this from EmailJS dashboard
+      'YOUR_SERVICE_ID',      // Add your Service ID
+      'YOUR_TEMPLATE_ID',     // Add your Template ID
       {
         from_name: formData.name,
         subject: formData.subject,
@@ -35,7 +38,7 @@ const Contact = () => {
         message: formData.message,
         to_email: 'omarelshemy010@gmail.com'
       },
-      'YOUR_PUBLIC_KEY' // Get this from EmailJS dashboard
+      'YOUR_PUBLIC_KEY'       // Add your Public Key
     )
     .then((response) => {
       alert('Message sent successfully!');
