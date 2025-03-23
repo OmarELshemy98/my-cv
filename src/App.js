@@ -4,7 +4,7 @@ import Layout from './components/Layout/Layout';
 import About from './components/About/About';
 import Projects from './components/Projects/Projects';
 import Skills from './components/Skills/Skills';
-import Contact from './components/Contact/contact';  // Single import with correct case
+import Contact from './components/Contact/Contact.jsx';  // Updated extension and case
 import Experience from './components/Experience/Experience';
 import Certificates from './components/Certificates/Certificates';
 import Box from '@mui/material/Box';
